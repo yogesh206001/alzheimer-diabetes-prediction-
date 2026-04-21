@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroEndocrine Predictor | Clinical AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a; /* Slate 900 */
+            background-image: radial-gradient(circle at 15% 50%, rgba(30, 58, 138, 0.4), transparent 25%),
+                              radial-gradient(circle at 85% 30%, rgba(15, 118, 110, 0.4), transparent 25%);
+            background-attachment: fixed;
+        }
+        .form-input {
+            width: 100%;
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 0.5rem;
+            color: #f8fafc;
+            padding: 0.75rem 1rem;
+            transition: all 0.2s ease;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: #38bdf8;
+            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+            background: rgba(15, 23, 42, 0.8);
+        }
+        .form-input::placeholder {
+            color: #64748b;
+        }
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #38bdf8, #2dd4bf);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-6 text-slate-300">
+
+    <div class="max-w-6xl w-full glass-panel rounded-2xl overflow-hidden">
+        <!-- Header -->
+        <div class="border-b border-slate-700/50 px-10 py-8 text-center relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-sky-400 to-teal-400"></div>
+            <h1 class="text-3xl md:text-4xl font-bold tracking-tight text-white mb-2">NeuroEndocrine <span class="gradient-text">Full Matrix Diagnostic</span></h1>
+            <p class="text-slate-400 max-w-2xl mx-auto">A comprehensive clinical prototype predicting Alzheimer's Disease pathology using all 16 variables from the endocrinological and biometric handwriting synthesis.</p>
+        </div>
+        
+        <!-- Form Section -->
+        <div class="p-10">
+            <form action="{% url 'predict' %}" method="POST" class="space-y-10">
+                {% csrf_token %}
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                    
+                    <!-- Clinical Panel -->
+                    <div class="space-y-6">
+                        <div class="flex items-center space-x-3 mb-6">
+                            <div class="bg-sky-500/20 p-2 rounded-lg">
+                                <svg class="w-6 h-6 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                            </div>
+                            <h2 class="text-xl font-semibold text-white">Full Endocrinology Panel</h2>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-5">
+                            <div class="col-span-2 sm:col-span-1">
+                                <label class="block text-sm font-medium text-slate-400 mb-1.5">Age (Years)</label>
+                                <input type="number" name="age" required class="form-input" placeholder="e.g. 68">
+                            </div>
+                            
+                            <div class="col-span-2 sm:col-span-1">
+                                <label class="block text-sm font-medium text-slate-400 mb-1.5">Pregnancies</label>
+                                <input type="number" name="pregnancies" required class="form-input" placeholder="e.g. 2">
+                            </div>
+
+                            <div class="col-span-2 sm:col-span-1">
+                                <label class="block text-sm font-medium text-slate-400 mb-1.5">Fasting Glucose (mg/dL)</label>
+                                <input type="number" step="0.1" name="glucose" required class="form-input" placeholder="e.g. 115">
+                            </div>
+
+                            <div class="col-span-2 sm:col-span-1">
+                                <label class="block text-sm font-medium text-slate-400 mb-1.5">Diastolic BP (mmHg)</label>
+                                <input type="number" step="0.1" name="blood_pressure" required class="form-input" placeholder="e.g. 80">
+                            </div>
+
+                            <div class="col-span-2 sm:col-span-1">
+                                <label class="block text-sm font-medium text-slate-400 mb-1.5">Skin Thickness (mm)</label>
+                                <input type="number" step="0.1" name="skin_thickness" required class="form-input" placeholder="e.g. 20">
+                            </div>
+
+                            <div class="col-span-2 sm:col-span-1">
+                                <label class="block text-sm font-medium text-slate-400 mb-1.5">Serum Insulin (mu U/ml)</label>
+                                <input type="number" step="0.1" name="insulin" required class="form-input" placeholder="e.g. 80">
+                            </div>
+                            
+                            <div class="col-span-2 sm:col-span-1">
+                                <label class="block text-sm font-medium text-slate-400 mb-1.5">Body Mass Index</label>
+                                <input type="number" step="0.1" name="bmi" required class="form-input" placeholder="e.g. 25.5">
+                            </div>
+                            
+                            <div class="col-span-2 sm:col-span-1">
+                                <label class="block text-sm font-medium text-slate-400 mb-1.5">Diabetes Pedigree Func</label>
+                                <input type="number" step="0.001" name="diabetes_pedigree" required class="form-input" placeholder="e.g. 0.50">
+                            </div>
+                            
+                            <div class="col-span-2">
+                                <label class="block text-sm font-medium text-slate-400 mb-1.5">Clinical Diabetes Diagnosis?</label>
+                                <select name="outcome" class="form-input text-white appearance-none">
+                                    <option value="0" class="bg-slate-800">Negative</option>
+                                    <option value="1" class="bg-slate-800">Positive</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cognitive Panel -->
+                    <div class="space-y-6">
+                        <div class="flex items-center space-x-3 mb-6">
+                            <div class="bg-teal-500/20 p-2 rounded-lg">
+                                <svg class="w-6 h-6 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+                            </div>
+                            <h2 class="text-xl font-semibold text-white">Full DARWIN Biometrics Panel</h2>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-5">
+                            <div class="col-span-2">
+                                <label class="block text-sm font-medium text-slate-400 mb-1.5">Mean Task Time (μs)</label>
+                                <input type="number" step="0.01" name="mean_total_time" required class="form-input" placeholder="e.g. 30000">
+                            </div>
+                            
+                            <div class="col-span-2">
+                                <label class="block text-sm font-medium text-slate-400 mb-1.5">Task Time Deviation (σ)</label>
+                                <input type="number" step="0.01" name="std_total_time" required class="form-input" placeholder="e.g. 15000">
+                            </div>
+
+                            <div class="col-span-2 sm:col-span-1">
+                                <label class="block text-sm font-medium text-slate-400 mb-1.5">Mean Pen Pressure</label>
+                                <input type="number" step="0.01" name="mean_pressure_mean" required class="form-input" placeholder="e.g. 1500">
+                            </div>
+
+                            <div class="col-span-2 sm:col-span-1">
+                                <label class="block text-sm font-medium text-slate-400 mb-1.5">Pressure Variance</label>
+                                <input type="number" step="0.01" name="mean_pressure_var" required class="form-input" placeholder="e.g. 50000">
+                            </div>
+
+                            <div class="col-span-2 sm:col-span-1">
+                                <label class="block text-sm font-medium text-slate-400 mb-1.5">Speed on Paper</label>
+                                <input type="number" step="0.0001" name="mean_speed_on_paper" required class="form-input" placeholder="e.g. 0.05">
+                            </div>
+
+                            <div class="col-span-2 sm:col-span-1">
+                                <label class="block text-sm font-medium text-slate-400 mb-1.5">GMRT on Paper</label>
+                                <input type="number" step="0.0001" name="mean_gmrt_on_paper" required class="form-input" placeholder="e.g. 0.0001">
+                            </div>
+
+                            <div class="col-span-2">
+                                <label class="block text-sm font-medium text-slate-400 mb-1.5">Motor Jerkiness (Mean Jerk)</label>
+                                <input type="number" step="0.00001" name="mean_jerk_on_paper" required class="form-input" placeholder="e.g. 0.00005">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Submit Action -->
+                <div class="pt-4 border-t border-slate-700/50 mt-6">
+                    <button type="submit" class="group relative w-full flex justify-center py-4 px-4 border border-transparent rounded-xl text-lg font-medium text-white overflow-hidden transition-all duration-300 transform hover:scale-[1.01] hover:shadow-[0_0_40px_-5px_rgba(56,189,248,0.4)] bg-gradient-to-r from-sky-600 to-teal-600 mt-6">
+                        <div class="absolute inset-0 w-full h-full bg-gradient-to-r from-sky-500 to-teal-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <span class="relative flex items-center">
+                            Compute Full-Matrix Prognostic Risk
+                            <svg class="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                        </span>
+                    </button>
+                    <p class="text-center text-xs text-slate-500 mt-3">Executing XGBoost Regressor (CV R² = 0.8705 ± 0.0084) across 16 dimensions — 5-fold validated.</p>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

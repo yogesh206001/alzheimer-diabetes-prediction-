@@ -1,0 +1,64 @@
+
+=============================================================
+  FULL PIPELINE VALIDATION REPORT
+=============================================================
+
+1. DATA CLEANING
+   - DARWIN: Winsorized at [1%%, 99%%] per feature (452 -> 7 features)
+   - Diabetes: Zero-imputation with median; clinical bounds enforced
+   - Post-fusion missing values: 0
+
+2. ALZHEIMER RISK SCORE FORMULA
+   age_comp   = MinMax( Age  + (Age  - 60 )^1.5  if Age  > 60  else 0 )
+   gluc_comp  = MinMax( Gluc + (Gluc - 140)^1.4  if Gluc > 140 else 0 )
+   dm_comp    = Outcome in [0, 1]
+   cog_comp   = MinMax( 0.35*mean_time + 0.25*mean_jerk
+                       + 0.20*std_time  + 0.20*(1 - mean_speed) )
+   raw        = 0.30*age + 0.20*gluc + 0.15*dm + 0.35*cog + N(0,0.04)
+   FINAL      = MinMaxScaler(raw)  in [0, 1]
+
+3. MODEL COMPARISON (80/20 Train/Test Split)
+                  Model  R2 Score      MSE
+      Linear Regression    0.8939 0.003971
+Random Forest Regressor    0.8765 0.004624
+Decision Tree Regressor    0.7984 0.007548
+
+4. RANDOM FOREST FEATURE IMPORTANCE
+                 Feature  Importance
+                 Outcome    0.600910
+          std_total_time    0.109475
+                 Glucose    0.105454
+                     Age    0.070958
+         mean_total_time    0.048260
+      mean_jerk_on_paper    0.017747
+       mean_pressure_var    0.010560
+      mean_gmrt_on_paper    0.007337
+     mean_speed_on_paper    0.006317
+      mean_pressure_mean    0.004373
+DiabetesPedigreeFunction    0.003740
+           BloodPressure    0.003318
+                     BMI    0.003056
+             Pregnancies    0.003016
+                 Insulin    0.002896
+           SkinThickness    0.002583
+
+5. SHAP IMPORTANCE (Linear Regression)
+                 Feature  Mean_Abs_SHAP
+                 Outcome       0.097559
+                 Glucose       0.043509
+          std_total_time       0.036006
+      mean_jerk_on_paper       0.034946
+                     Age       0.031379
+     mean_speed_on_paper       0.021656
+      mean_gmrt_on_paper       0.010332
+         mean_total_time       0.005180
+           BloodPressure       0.003892
+           SkinThickness       0.001958
+       mean_pressure_var       0.001744
+             Pregnancies       0.001400
+                     BMI       0.001343
+DiabetesPedigreeFunction       0.000909
+      mean_pressure_mean       0.000815
+                 Insulin       0.000446
+
+=============================================================

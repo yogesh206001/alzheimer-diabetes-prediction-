@@ -1,0 +1,512 @@
+
+================================================================================
+        COMBINED DIABETES AND ALZHEIMER'S RISK DATASET
+        Complete Documentation Package — Zenodo & Kaggle Ready
+        Prepared By : Lokesh Dhangar
+        Date        : April 2026
+        Version     : 1.0
+================================================================================
+
+
+================================================================================
+SECTION 1 — DATASET DESCRIPTION (For Repository Submission)
+================================================================================
+
+TITLE:
+    Combined Diabetes and Alzheimer's Risk Dataset
+
+PURPOSE:
+    This dataset was created to support interdisciplinary machine learning
+    research at the intersection of metabolic disorder prediction and
+    neurocognitive risk assessment. The primary goal is to provide a unified,
+    structured dataset that enables researchers and practitioners to train,
+    evaluate, and explain predictive models for both Diabetes and Alzheimer's
+    Disease risk — within a single analytical pipeline.
+
+    The dataset is specifically designed for use in supervised learning,
+    clinical decision support systems, and Explainable Artificial Intelligence
+    (XAI) experiments. It is a processed, integrated derivative of two well-
+    established public datasets, augmented with engineered risk features to
+    simulate Alzheimer's-related clinical indicators.
+
+SOURCE ACKNOWLEDGMENT:
+    This dataset is derived from the following publicly available sources:
+
+    1. Pima Indians Diabetes Dataset
+       Source   : Kaggle / UCI Machine Learning Repository
+       URL      : https://www.kaggle.com/datasets/uciml/pima-indians-diabetes-database
+       License  : CC0 — Public Domain
+
+    2. OASIS Longitudinal MRI Alzheimer's Dataset
+       Source   : Open Access Series of Imaging Studies (OASIS)
+       URL      : https://www.oasis-brains.org / https://www.kaggle.com/datasets/jboysen/mri-and-alzheimers
+       License  : CC BY-NC-SA 4.0
+
+    IMPORTANT: The authors do not claim ownership of the original raw data.
+    All original data copyright belongs to the respective source organizations.
+    This dataset is a processed, transformed, and integrated derivative created
+    for non-commercial academic research purposes only.
+
+NATURE OF THE DATASET:
+    - Type       : Structured / Tabular (CSV Format)
+    - Rows       : Synthetic-fused, derived records aligned from both sources
+    - Columns    : 15+ clinical and engineered features
+    - Task Types : Binary Classification (Diabetes), Risk Regression
+                   (Alzheimer's Score), Multi-class Classification
+                   (Dementia Risk Level)
+
+SIMULATED FEATURES — EXPLANATION:
+    Since the Pima Indians Diabetes Dataset does not natively contain
+    Alzheimer's-specific biomarkers, a set of features have been carefully
+    engineered and simulated using clinically validated relationships from
+    published medical literature. These include:
+
+    - Alzheimer's Risk Score : A continuous score (0–100) derived using a
+      weighted combination of Age, BMI, Glucose levels, Insulin resistance,
+      and OASIS-mapped cognitive indicators (CDR, nWBV, MMSE-proxy). The
+      scoring formula reflects the established epidemiological link between
+      metabolic syndrome and neurodegenerative disease progression.
+
+    - Dementia Risk Label    : A categorical label (Low / Medium / High)
+      derived by applying threshold-based classification to the Alzheimer's
+      Risk Score, informed by clinical dementia rating (CDR) conventions.
+
+    These engineered features are clearly labeled in the dataset and should be
+    treated as simulation-derived indicators for research and modeling purposes,
+    not as clinically validated diagnoses.
+
+PROFESSIONAL DISCLAIMER:
+    The variability and distribution of values in this dataset reflect inherent
+    statistical diversity present in the original source data, as well as the
+    nature of feature engineering and data integration processes. Any apparent
+    inconsistencies between individual feature values are attributable to
+    inter-dataset sampling differences, missing value imputation strategies,
+    and synthetic fusion methodology — not to errors in data collection.
+    This dataset has undergone systematic preprocessing to ensure structural
+    integrity, consistency, and readiness for machine learning workflows.
+
+    This dataset is intended for academic, educational, and non-commercial
+    research use only. It must not be used for clinical diagnosis, medical
+    decision-making, or patient treatment without proper validation by
+    certified medical professionals.
+
+
+================================================================================
+SECTION 2 — README FILE (Structured & Detailed)
+================================================================================
+
+------------------------------------------------------------------------
+DATASET OVERVIEW
+------------------------------------------------------------------------
+
+    Name     : Combined Diabetes and Alzheimer's Risk Dataset
+    Format   : CSV (Comma-Separated Values)
+    Version  : 1.0
+    Release  : April 2026
+    Creator  : Lokesh Dhangar (B.Tech Final Year Project)
+    Domain   : Healthcare AI / Clinical Decision Support / XAI
+
+    This dataset provides a unified view of clinical indicators for both
+    Diabetes and Alzheimer's disease risk, making it particularly suitable
+    for multi-task learning, feature importance analysis, and Explainable AI
+    research in the biomedical domain.
+
+------------------------------------------------------------------------
+COLUMN DESCRIPTIONS
+------------------------------------------------------------------------
+
+    +------------------------------+----------+---------------------------+----------------------------+
+    | Column Name                  | Type     | Unit / Values             | Description                |
+    +------------------------------+----------+---------------------------+----------------------------+
+    | Pregnancies                  | Integer  | Count (0–17)              | Number of times pregnant   |
+    | Glucose                      | Float    | mg/dL                     | Plasma glucose (2hr oral   |
+    |                              |          |                           | glucose tolerance test)    |
+    | BloodPressure                | Float    | mm Hg                     | Diastolic blood pressure   |
+    | SkinThickness                | Float    | mm                        | Triceps skin fold thickness|
+    | Insulin                      | Float    | µU/mL                     | 2-Hour serum insulin       |
+    | BMI                          | Float    | kg/m²                     | Body mass index            |
+    | DiabetesPedigreeFunction     | Float    | Score (0.0–2.5)           | Genetic diabetes likelihood|
+    | Age                          | Integer  | Years                     | Age of the patient         |
+    | Outcome                      | Integer  | 0 = No Diabetes,          | Diabetes diagnosis label   |
+    |                              |          | 1 = Diabetes              |                            |
+    | Visit_Count                  | Integer  | Count                     | No. of MRI/clinic visits   |
+    |                              |          |                           | (from OASIS mapping)       |
+    | nWBV                         | Float    | Ratio (0.60–0.90)         | Normalized whole brain     |
+    |                              |          |                           | volume (OASIS-derived)     |
+    | CDR                          | Float    | 0, 0.5, 1, 2              | Clinical Dementia Rating   |
+    | MMSE_proxy                   | Float    | Score (0–30)              | Mini-Mental State Exam     |
+    |                              |          |                           | (OASIS-aligned proxy)      |
+    | alzheimer_risk_score         | Float    | Score (0.0–100.0)         | Engineered risk score —    |
+    |                              |          |                           | simulated indicator         |
+    | dementia_risk                | String   | Low / Medium / High       | Categorical risk class     |
+    |                              |          |                           | derived from risk score    |
+    +------------------------------+----------+---------------------------+----------------------------+
+
+    NOTES:
+    - Columns nWBV, CDR, MMSE_proxy, and Visit_Count are integrated from
+      the OASIS dataset via synthetic data fusion (see creation methodology).
+    - alzheimer_risk_score and dementia_risk are engineered features and are
+      NOT sourced directly from any original dataset.
+
+------------------------------------------------------------------------
+DATA PREPROCESSING STEPS
+------------------------------------------------------------------------
+
+    The following preprocessing operations were applied to produce this dataset:
+
+    Step 1 — Missing / Zero Value Treatment:
+        Biologically implausible zero values in Glucose, BloodPressure,
+        SkinThickness, Insulin, and BMI were treated as missing (NaN) and
+        replaced using the median value of the respective column, stratified
+        by the Diabetes Outcome label to preserve class distribution.
+
+    Step 2 — Outlier Handling:
+        Extreme outliers were identified using the IQR (Interquartile Range)
+        method. Values beyond 3×IQR were capped at the 1st and 99th percentile
+        boundaries (Winsorization) to reduce the influence of anomalous records
+        while retaining dataset size.
+
+    Step 3 — Feature Scaling:
+        All continuous numerical features were normalized using
+        Min-Max Normalization (range: 0–1) to ensure model compatibility and
+        prevent feature dominance in distance-based algorithms.
+
+    Step 4 — OASIS Dataset Reduction & Alignment:
+        The OASIS Longitudinal Dataset was reduced to: Age, nWBV, CDR,
+        MMSE (proxy), and Visit_Count. Records were aligned with Diabetes
+        dataset entries through age-band based synthetic sampling, creating a
+        statistically consistent fused record set.
+
+    Step 5 — Risk Score Engineering:
+        The Alzheimer's Risk Score was computed using the following formula:
+
+            risk_score = (0.30 × Age_normalized)
+                       + (0.25 × Glucose_normalized)
+                       + (0.20 × BMI_normalized)
+                       + (0.15 × (1 - nWBV_normalized))
+                       + (0.10 × CDR_normalized)
+                         × 100
+
+        Coefficients are based on published epidemiological risk weight
+        studies on metabolic-neurocognitive comorbidity.
+
+    Step 6 — Dementia Risk Labeling:
+        Continuous risk scores were categorized as:
+            Low    : score < 35
+            Medium : 35 ≤ score < 65
+            High   : score ≥ 65
+
+    Step 7 — Final Dataset Export:
+        The cleaned, merged, and feature-engineered dataset was exported to
+        CSV format with UTF-8 encoding and no index column.
+
+------------------------------------------------------------------------
+HOW THE DATASET WAS CREATED
+------------------------------------------------------------------------
+
+    PHASE 1 — Source Data Acquisition:
+        Both the Pima Indians Diabetes Dataset and the OASIS Longitudinal MRI
+        Dataset were downloaded from their respective public sources (Kaggle
+        and OASIS-Brains portal).
+
+    PHASE 2 — Independent Cleaning:
+        Each dataset underwent independent preprocessing (missing value
+        imputation, outlier treatment, and type normalization) before fusion.
+
+    PHASE 3 — Feature Selection from OASIS:
+        From the OASIS dataset, only clinically relevant cognitive and
+        structural features were retained: nWBV, CDR, MMSE, Visit_Count, Age.
+        The MRI file IDs, session IDs, and other administrative columns were
+        removed.
+
+    PHASE 4 — Synthetic Fusion via Age-Band Matching:
+        Since direct patient-level linkage between the two datasets is not
+        possible (different patient populations), synthetic fusion was applied:
+        For each Diabetes record, an OASIS record was matched and sampled
+        from within the same ±5 year age band to preserve realistic age-feature
+        correlation. This approach is consistent with synthetic data augmentation
+        methodologies commonly used in biomedical ML research.
+
+    PHASE 5 — Risk Feature Engineering:
+        The Alzheimer's Risk Score and Dementia Risk Label were computed
+        post-fusion as engineered features, using the weighted formula
+        documented in Section 5 above.
+
+    PHASE 6 — Validation & Export:
+        Distribution checks, correlation analysis, and class balance
+        verification were performed before final export.
+
+------------------------------------------------------------------------
+EXAMPLE USE CASES
+------------------------------------------------------------------------
+
+    1. BINARY CLASSIFICATION (Diabetes Prediction):
+       Use the standard Pima features with "Outcome" as the target variable
+       to train diabetes classifiers (Random Forest, XGBoost, SVM, etc.)
+
+    2. REGRESSION (Alzheimer's Risk Scoring):
+       Use clinical and cognitive features to train a regression model that
+       predicts the continuous alzheimer_risk_score.
+
+    3. MULTI-CLASS CLASSIFICATION (Dementia Risk Stratification):
+       Use dementia_risk (Low/Medium/High) as the target for classification
+       models aimed at early-stage risk triage.
+
+    4. MULTI-TASK LEARNING:
+       Train a single model with multiple output heads to simultaneously
+       predict Diabetes Outcome and Alzheimer's Risk.
+
+    5. EXPLAINABLE AI (XAI) RESEARCH:
+       Apply SHAP (SHapley Additive exPlanations), LIME, or Grad-CAM
+       visualizations to understand which features drive risk predictions,
+       suitable for clinical interpretability studies.
+
+    6. HEALTHCARE ANALYTICS:
+       Use for population-level risk analysis, comorbidity research, or
+       survival analysis combining both metabolic and cognitive data.
+
+------------------------------------------------------------------------
+LIMITATIONS AND ASSUMPTIONS
+------------------------------------------------------------------------
+
+    1. The Alzheimer's risk score and dementia risk label are SIMULATED
+       features derived through engineered computation — they are NOT
+       derived from actual Alzheimer's patient diagnoses.
+
+    2. The synthetic fusion of the two datasets is age-band based. Individual
+       records from the two datasets do NOT represent the same patients.
+
+    3. The OASIS cognitive indicators (MMSE proxy, nWBV, CDR) are sourced
+       from a different clinical population (older adults 60–96 years) and
+       merged statistically. They may not perfectly reflect the Pima diabetes
+       cohort's actual cognitive profile.
+
+    4. The dataset should NOT be used for real clinical diagnosis or patient
+       risk assessment without validation by medical domain experts.
+
+    5. The Pima Indians Diabetes Dataset represents a historically specific
+       demographic (Pima Indian women, ages 21+). Generalizability to other
+       populations must be validated separately.
+
+------------------------------------------------------------------------
+INSTRUCTIONS FOR USING THE DATASET
+------------------------------------------------------------------------
+
+    LOADING (Python / Pandas):
+    --------------------------
+        import pandas as pd
+        df = pd.read_csv("combined_diabetes_alzheimer_dataset.csv")
+        print(df.head())
+        print(df.info())
+        print(df.describe())
+
+    BASIC PREPROCESSING (Before Model Training):
+    ---------------------------------------------
+        from sklearn.preprocessing import MinMaxScaler
+        from sklearn.model_selection import train_test_split
+
+        features = ['Glucose', 'BMI', 'Age', 'BloodPressure',
+                    'Insulin', 'nWBV', 'CDR', 'alzheimer_risk_score']
+        X = df[features]
+        y_diabetes = df['Outcome']
+        y_alzheimer = df['dementia_risk']
+
+        X_train, X_test, y_train, y_test = train_test_split(
+            X, y_diabetes, test_size=0.2, random_state=42)
+
+    RECOMMENDED MODELS:
+    -------------------
+        - Diabetes Classification : Random Forest, XGBoost, SVM, Logistic Regression
+        - Alzheimer Risk Score    : XGBoost Regressor, Linear Regression, Ridge
+        - Dementia Risk Level     : Random Forest Classifier, Gradient Boosting
+
+    XAI (SHAP Example):
+    --------------------
+        import shap
+        model = ...  # trained model
+        explainer = shap.TreeExplainer(model)
+        shap_values = explainer.shap_values(X_test)
+        shap.summary_plot(shap_values, X_test)
+
+    CITATION (if used in research):
+    --------------------------------
+        Please cite both this dataset and the original source datasets
+        as described in Section 4 (License & Attribution) below.
+
+
+================================================================================
+SECTION 3 — LICENSE TEXT (CC BY 4.0)
+================================================================================
+
+------------------------------------------------------------------------
+HUMAN-READABLE SUMMARY (Plain Language Version)
+------------------------------------------------------------------------
+
+    LICENSE: Creative Commons Attribution 4.0 International (CC BY 4.0)
+
+    You are FREE to:
+        ✔  Share  — Copy and redistribute this dataset in any medium or format.
+        ✔  Adapt  — Transform, build upon, or derive new datasets from this one.
+        ✔  Use    — Use this dataset for academic, research, or educational
+                    purposes, including machine learning model training.
+
+    Under the FOLLOWING CONDITIONS:
+        ✔  Attribution — You MUST give appropriate credit to the dataset
+                         creator (Lokesh Dhangar) and acknowledge the original
+                         source datasets (Pima Indians / OASIS). You must
+                         provide a link to the license and indicate if changes
+                         were made.
+
+    You may NOT:
+        ✖  Use this dataset for clinical diagnosis or patient treatment
+           without proper medical validation.
+        ✖  Claim ownership of the original raw data (Pima / OASIS).
+        ✖  Misrepresent the simulated features as clinically validated data.
+
+------------------------------------------------------------------------
+FORMAL LICENSE DECLARATION
+------------------------------------------------------------------------
+
+    This dataset — "Combined Diabetes and Alzheimer's Risk Dataset" —
+    is licensed under the Creative Commons Attribution 4.0 International
+    License (CC BY 4.0).
+
+    Full License Text: https://creativecommons.org/licenses/by/4.0/legalcode
+
+    Copyright (c) 2026 Lokesh Dhangar
+
+    You are permitted to copy, distribute, display, and make derivative works
+    of this dataset and its associated documentation, provided that:
+
+    (a) ATTRIBUTION REQUIREMENT:
+        The following attribution must accompany any public use, distribution,
+        or derivative work:
+
+            "This dataset is a processed and integrated derivative work created
+             by Lokesh Dhangar (2026), derived from:
+             (1) Pima Indians Diabetes Database — UCI / Kaggle (CC0 license)
+             (2) OASIS Longitudinal MRI Dataset — oasis-brains.org
+             Original data copyright belongs to the respective source
+             organizations. This derivative dataset is licensed under CC BY 4.0."
+
+    (b) INDICATION OF CHANGES:
+        If you transform, adapt, or build upon this dataset, you must clearly
+        indicate what changes were made and not imply that the original creator
+        endorses your modified version.
+
+    (c) NO ADDITIONAL RESTRICTIONS:
+        You may not apply legal terms or technological measures that legally
+        restrict others from doing anything this license permits.
+
+    ORIGINAL DATA RIGHTS DISCLAIMER:
+        The Pima Indians Diabetes Dataset is in the public domain (CC0).
+        The OASIS dataset is licensed under CC BY-NC-SA 4.0. This derivative
+        dataset does not override those licenses for the original raw data.
+        Users must independently comply with the OASIS license terms when
+        working with or redistributing OASIS-derived content.
+
+    MEDICAL / LEGAL DISCLAIMER:
+        This dataset is provided for academic and research purposes only.
+        The creators make no warranties, expressed or implied, regarding
+        the accuracy, completeness, or fitness for any clinical application.
+        Use for medical diagnosis is strictly prohibited without independent
+        clinical validation.
+
+
+================================================================================
+SECTION 4 — METADATA (For Zenodo / Kaggle Visibility)
+================================================================================
+
+------------------------------------------------------------------------
+SUGGESTED TITLE
+------------------------------------------------------------------------
+
+    "Combined Diabetes and Alzheimer's Risk Dataset: A Processed and Integrated
+     Multi-Disease Clinical Dataset for Machine Learning and XAI Research"
+
+------------------------------------------------------------------------
+SHORT ABSTRACT (2–3 Lines)
+------------------------------------------------------------------------
+
+    This dataset provides a unified, preprocessed tabular dataset integrating
+    clinical features from the Pima Indians Diabetes Database and OASIS
+    Alzheimer's longitudinal study. It includes engineered Alzheimer's risk
+    scores and dementia risk classification labels, enabling multi-task
+    machine learning, clinical risk prediction, and Explainable AI (XAI)
+    research in the biomedical domain. Suitable for final-year academic
+    projects, healthcare analytics, and ML benchmark studies.
+
+------------------------------------------------------------------------
+KEYWORDS / TAGS
+------------------------------------------------------------------------
+
+    diabetes prediction
+    alzheimer's disease
+    dementia risk classification
+    machine learning
+    healthcare AI
+    clinical dataset
+    explainable AI
+    SHAP
+    XGBoost
+    random forest
+    risk score prediction
+    neurocognitive comorbidity
+    biomedical informatics
+    Pima Indians Diabetes
+    OASIS dataset
+    multi-task learning
+    supervised learning
+    feature engineering
+    cardiovascular
+    metabolic syndrome
+    clinical decision support
+    B.Tech project dataset
+    Kaggle dataset
+    Zenodo dataset
+
+------------------------------------------------------------------------
+SUGGESTED ZENODO FIELDS
+------------------------------------------------------------------------
+
+    Upload Type    : Dataset
+    Access         : Open Access
+    License        : Creative Commons Attribution 4.0 International
+    Communities    : Machine Learning, Healthcare AI, Open Science
+    Resource Type  : Dataset
+    Language       : English
+    Related Works  :
+        - Pima Indians Diabetes Dataset (Kaggle / UCI)
+        - OASIS Longitudinal MRI Dataset (oasis-brains.org)
+
+------------------------------------------------------------------------
+CITATION FORMAT (For Research Papers)
+------------------------------------------------------------------------
+
+    APA:
+        Dhangar, L. (2026). Combined Diabetes and Alzheimer's Risk Dataset
+        (Version 1.0) [Data set]. Zenodo / Kaggle.
+        [DOI / URL to be added after upload]
+
+    BibTeX:
+        @dataset{dhangar2026combined,
+          author    = {Lokesh Dhangar},
+          title     = {Combined Diabetes and Alzheimer's Risk Dataset},
+          year      = {2026},
+          publisher = {Zenodo / Kaggle},
+          version   = {1.0},
+          note      = {Derived from Pima Indians Diabetes Dataset (UCI/Kaggle)
+                       and OASIS Longitudinal MRI Dataset},
+          license   = {CC BY 4.0}
+        }
+
+
+================================================================================
+END OF DOCUMENTATION
+================================================================================
+    File   : Dataset_Documentation.txt
+    Author : Lokesh Dhangar
+    Date   : April 2026
+    Usage  : Upload this file (or its sections) to Zenodo and Kaggle
+             as part of the dataset repository submission.
+================================================================================

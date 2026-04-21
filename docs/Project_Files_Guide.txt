@@ -1,0 +1,261 @@
+================================================================================
+  IMPORTANT PROJECT FILES — Combined Diabetes & Alzheimer's Risk Prediction
+================================================================================
+
+DATE : April 2026
+BY   : Lokesh Dhangar (B.Tech Final Year Project)
+
+================================================================================
+1. DATASETS (CSV / Data Files)
+================================================================================
+
+  advanced_fused_dataset.csv   — MAIN DATASET (use this for training models)
+                                 Fully cleaned, merged, and feature-engineered.
+                                 Contains Alzheimer's risk score + dementia label.
+
+  fused_dataset.csv            — Earlier version of fused dataset (backup)
+
+  DARWIN.csv                   — Handwriting-based Alzheimer's raw dataset
+                                 (used as one of the source inputs)
+
+  correlation_matrix.csv       — Correlation matrix of all features (analytics)
+  feature_importance.csv       — SHAP / model feature importance rankings
+  model_cv_results.csv         — Cross-validation results for each model
+
+================================================================================
+2. PYTHON SCRIPTS (Core ML Pipeline)
+================================================================================
+
+  data_fusion.py               — Fuses Diabetes + OASIS/DARWIN datasets,
+                                 engineers alzheimer_risk_score feature
+
+  new.py                       — Main training script (Random Forest model,
+                                 SHAP analysis, full pipeline)
+
+  model_comparison.py          — Compares XGBoost vs Linear Regression with
+                                 cross-validation, MAE, RMSE, R², Adjusted R²
+
+  enhanced_model_evaluation.py — Enhanced evaluation with 5-fold CV,
+                                 publication-ready metrics table
+
+  export_final_model.py        — Exports final trained model + scaler to .pkl
+  export_model.py              — Earlier model export script (backup)
+
+  shap_analysis.py             — Standalone SHAP explainability analysis,
+                                 generates summary plots
+
+  advanced_analysis.py         — Additional analytics (correlation, feature
+                                 distribution, extra visualizations)
+
+================================================================================
+3. TRAINED MODELS (Pickle Files)
+================================================================================
+
+  final_model.pkl              — PRODUCTION MODEL (use in Django webapp)
+                                 Best performing trained model (Random Forest)
+
+  alzheimer_model.pkl          — Alzheimer risk regression model
+
+  scaler.pkl                   — MinMaxScaler fitted on training data
+                                 (must be loaded alongside the model)
+
+  feature_meta.pkl             — Feature metadata (column names, order)
+                                 Needed for correct prediction input format
+
+================================================================================
+4. DJANGO WEB APPLICATION
+================================================================================
+
+  webapp/manage.py             — Django project entry point (run server here)
+  webapp/config/               — Django settings, URLs, WSGI config
+  webapp/predictor/            — Main Django app (views, models, templates)
+    ├── views.py               — Prediction logic (calls model + scaler)
+    ├── urls.py                — URL routing for predictor app
+    ├── models.py              — Database models (if any)
+    └── templates/predictor/   — HTML templates (index + result pages)
+
+  webapp/db.sqlite3            — SQLite database (Django default)
+
+================================================================================
+5. RESULTS & OUTPUTS
+================================================================================
+
+  shap_summary.png             — SHAP feature importance plot (use in report/PPT)
+  model_comparison_results.txt — Model comparison table (XGBoost vs LR metrics)
+  enhanced_model_results.txt   — Enhanced evaluation metrics output
+  validation_report.txt        — Model validation summary
+
+================================================================================
+6. DOCUMENTATION & RESEARCH
+================================================================================
+
+  Research_Paper.md            — Full IEEE-format research paper (draft)
+  IEEE_Research_Paper.md       — Revised / extended IEEE paper version
+  Results_and_Discussion.md    — Results section for the paper
+  Presentation_Outline.md      — PPT slide-by-slide outline
+  Final_Project_Viva_Guide.txt — Viva Q&A prep guide (all technical questions)
+  Dataset_Documentation.txt    — Dataset README for Zenodo/Kaggle upload
+
+================================================================================
+7. FILES YOU CAN IGNORE (Not Core to Project)
+================================================================================
+
+  diabetes-data.tar.Z          — Compressed raw data archive (already processed)
+  DARWIN_readme.rtf            — DARWIN dataset description (reference only)
+  Index / README               — Leftover index files (not relevant)
+  project_guide_zenodo_ieee.txt— Earlier draft guide
+  project_summary_short.txt    — Short summary (reference only)
+  feature_description.txt      — Earlier feature notes
+
+================================================================================
+QUICK START ORDER (Run in This Sequence If Rebuilding):
+================================================================================
+
+  STEP 1 → data_fusion.py              (creates advanced_fused_dataset.csv)
+  STEP 2 → new.py                      (trains model, generates SHAP plots)
+  STEP 3 → model_comparison.py         (compare models, get metrics)
+  STEP 4 → export_final_model.py       (saves final_model.pkl + scaler.pkl)
+  STEP 5 → cd webapp && python manage.py runserver   (launch Django app)
+
+================================================================================
+8. FILES TO DELETE BEFORE FINAL SUBMISSION
+================================================================================
+
+  ⚠  REMOVE THESE — They are redundant, old, or sensitive. Not needed in zip.
+
+  DELETE — Duplicate / Old Versions:
+  ------------------------------------
+  fused_dataset.csv            → Replaced by advanced_fused_dataset.csv
+  export_model.py              → Replaced by export_final_model.py
+  alzheimer_model.pkl          → Use final_model.pkl only (avoid confusion)
+  Research_Paper.md            → Replaced by IEEE_Research_Paper.md
+
+  DELETE — Irrelevant / Leftover Files:
+  ----------------------------------------
+  diabetes-data.tar.Z          → Raw compressed archive, not needed
+  DARWIN_readme.rtf            → Reference doc, not project output
+  Index                        → Empty/leftover index file
+  README                       → Incomplete leftover file
+  project_guide_zenodo_ieee.txt→ Old draft, superseded by Dataset_Documentation.txt
+  project_summary_short.txt    → Redundant with viva guide
+  feature_description.txt      → Old notes, not part of submission
+  Zenodo_Upload_Description.md → Merged into Dataset_Documentation.txt
+
+  DELETE — Logs / Temp Results (keep only final):
+  --------------------------------------------------
+  enhanced_model_results.txt   → Duplicate of model_comparison_results.txt
+                                  (keep model_comparison_results.txt only)
+
+  ✅ KEEP THESE FOR SUBMISSION (Final Clean List):
+  --------------------------------------------------
+  advanced_fused_dataset.csv   ← Main dataset
+  DARWIN.csv                   ← Source dataset
+  data_fusion.py               ← Pipeline script
+  new.py                       ← Training script
+  model_comparison.py          ← Model comparison
+  enhanced_model_evaluation.py ← Evaluation script
+  export_final_model.py        ← Export script
+  shap_analysis.py             ← XAI script
+  advanced_analysis.py         ← Analytics script
+  final_model.pkl              ← Trained model
+  scaler.pkl                   ← Feature scaler
+  feature_meta.pkl             ← Feature metadata
+  feature_importance.csv       ← Feature rankings
+  model_cv_results.csv         ← CV results table
+  model_comparison_results.txt ← Final metrics report
+  validation_report.txt        ← Validation summary
+  shap_summary.png             ← SHAP graph
+  model_comparison_chart.png   ← Model comparison graph
+  feature_importance_chart.png ← Feature importance graph
+  IEEE_Research_Paper.md       ← Main research paper
+  Results_and_Discussion.md    ← Paper section
+  Presentation_Outline.md      ← PPT outline
+  Final_Project_Viva_Guide.txt ← Viva prep guide
+  Dataset_Documentation.txt    ← Zenodo/Kaggle README
+  Project_Files_Guide.txt      ← This file
+  webapp/                      ← Django web application
+
+================================================================================
+9. IMAGES & GRAPHS (Project Visualizations)
+================================================================================
+
+  The following graphs are generated from your actual model results and are
+  ready to be inserted into your IEEE paper, PPT presentation, and Zenodo upload.
+
+  --------------------------------------------------------------------------------
+  GRAPH 1 : model_comparison_chart.png
+  --------------------------------------------------------------------------------
+  Title    : Model Comparison — R² Score (5-Fold Cross-Validation)
+  Location : diabetes+alzihmer\model_comparison_chart.png
+  Use In   : IEEE Paper (Section IV — Results), PPT Slide 8, Zenodo Gallery
+
+  Data Used (from model_comparison_results.txt):
+  ┌──────────────────────┬────────┬──────────┬──────────┬──────────┐
+  │ Model                │  R²    │ Adj R²   │  MAE     │  RMSE    │
+  ├──────────────────────┼────────┼──────────┼──────────┼──────────┤
+  │ Linear Regression    │ 0.8706 │  0.8593  │ 0.051602 │ 0.065723 │ ← BEST
+  │ XGBoost              │ 0.8705 │  0.8592  │ 0.052658 │ 0.065913 │ ← MOST STABLE
+  │ Random Forest        │ 0.8648 │  0.8530  │ 0.052869 │ 0.067196 │
+  │ Decision Tree        │ 0.7436 │  0.7212  │ 0.073036 │ 0.092172 │
+  └──────────────────────┴────────┴──────────┴──────────┴──────────┘
+  All metrics = mean across 5-Fold CV (shuffle=True, seed=42, n=1000)
+
+  Key Insight: Linear Regression and XGBoost nearly tied (R²=0.8706 vs 0.8705),
+  but XGBoost showed lower variance (std=0.0084 vs 0.0178), making it more
+  stable for deployment in clinical decision support systems.
+
+  --------------------------------------------------------------------------------
+  GRAPH 2 : feature_importance_chart.png
+  --------------------------------------------------------------------------------
+  Title    : Feature Importance — Random Forest Model
+  Location : diabetes+alzihmer\feature_importance_chart.png
+  Use In   : IEEE Paper (Section IV — XAI / SHAP Discussion), PPT Slide 9
+
+  Data Used (from feature_importance.csv):
+  ┌─────────────────────────────┬─────────────┬──────────────────────────────┐
+  │ Feature                     │ Importance  │ Category                     │
+  ├─────────────────────────────┼─────────────┼──────────────────────────────┤
+  │ Outcome (Diabetes)          │   60.09%    │ Diabetes clinical label      │
+  │ std_total_time (Handwriting)│   10.95%    │ DARWIN cognitive biometric   │
+  │ Glucose                     │   10.55%    │ Metabolic / clinical         │
+  │ Age                         │    7.10%    │ Demographic                  │
+  │ mean_total_time             │    4.83%    │ DARWIN cognitive biometric   │
+  │ mean_jerk_on_paper          │    1.77%    │ DARWIN cognitive biometric   │
+  │ mean_pressure_var           │    1.06%    │ DARWIN cognitive biometric   │
+  │ mean_gmrt_on_paper          │    0.73%    │ DARWIN cognitive biometric   │
+  │ mean_speed_on_paper         │    0.63%    │ DARWIN cognitive biometric   │
+  │ DiabetesPedigreeFunction    │    0.37%    │ Genetic / clinical           │
+  │ BloodPressure               │    0.33%    │ Metabolic / clinical         │
+  │ BMI                         │    0.31%    │ Metabolic / clinical         │
+  └─────────────────────────────┴─────────────┴──────────────────────────────┘
+
+  Key Insight: Diabetes Outcome is the single most predictive feature (60.09%),
+  confirming the strong metabolic-neurocognitive comorbidity link. Handwriting
+  biometrics (DARWIN) contribute ~19% combined, validating their inclusion.
+
+  --------------------------------------------------------------------------------
+  GRAPH 3 : shap_summary.png  (already generated by shap_analysis.py)
+  --------------------------------------------------------------------------------
+  Title    : SHAP Summary Plot — Feature Impact on Alzheimer Risk Score
+  Location : diabetes+alzihmer\shap_summary.png
+  Use In   : IEEE Paper (Section V — Explainability / XAI), PPT Slide 10,
+             Zenodo dataset gallery
+
+  Interpretation Note for Paper:
+  The SHAP summary plot shows both the magnitude and direction of feature
+  impact on model output. Features appearing at the top have the highest
+  global importance. Red dots indicate high feature values; blue dots indicate
+  low values. A rightward shift = positive impact on predicted risk score.
+
+  --------------------------------------------------------------------------------
+  GRAPHS SUMMARY TABLE (For PPT / Report Reference):
+  --------------------------------------------------------------------------------
+  ┌─────┬───────────────────────────────┬─────────────────────────────────────┐
+  │ No. │ File Name                     │ Use For                             │
+  ├─────┼───────────────────────────────┼─────────────────────────────────────┤
+  │  1  │ model_comparison_chart.png    │ Results section, model benchmarking │
+  │  2  │ feature_importance_chart.png  │ XAI section, feature analysis       │
+  │  3  │ shap_summary.png              │ Explainability / SHAP discussion    │
+  └─────┴───────────────────────────────┴─────────────────────────────────────┘
+
+================================================================================
